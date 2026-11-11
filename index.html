@@ -1,62 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070b14">
-<title>NEXUS | AI Trading Command Centre</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07111d">
+<title>NEXUS — AI Trading Intelligence</title>
 <style>
-:root{--bg:#070b14;--panel:#0d1625;--panel2:#101e31;--line:#18314a;--cyan:#42e8ff;--blue:#438cff;--muted:#8aa3ba;--green:#36e0a1;--red:#ff6b83}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -10%,#12345a 0,transparent 40%),var(--bg);color:#eaf7ff;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{padding:20px 17px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#070b14ed;backdrop-filter:blur(14px);z-index:5}
-.brand{font-size:22px;letter-spacing:5px;font-weight:800;color:var(--cyan);text-shadow:0 0 18px #42e8ff66}.sub{font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:4px}
-.status{float:right;font-size:10px;color:var(--green);border:1px solid #246b5b;padding:6px 9px;border-radius:20px;margin-top:4px}
-nav{display:flex;gap:8px;overflow:auto;padding:12px 14px;scrollbar-width:none}nav button{white-space:nowrap;background:#0b1726;border:1px solid var(--line);color:#9fb8cc;padding:9px 12px;border-radius:20px;font-size:12px}nav button.active{color:var(--cyan);border-color:var(--cyan);background:#0e2a3a}
-main{padding:4px 14px 90px;max-width:900px;margin:auto}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:2px;margin:16px 2px 9px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:linear-gradient(145deg,#112239,#0a1321 75%);border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:0 8px 28px #0004;min-width:0}.wide{grid-column:1/-1}.label{color:var(--muted);font-size:11px}.value{font-size:23px;font-weight:700;margin-top:7px;letter-spacing:.3px}.positive{color:var(--green)}.negative{color:var(--red)}.small{font-size:11px;color:var(--muted);margin-top:5px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.asset{font-weight:650}.pill{font-size:10px;border:1px solid var(--line);border-radius:12px;padding:4px 7px;color:var(--muted)}
-table{width:100%;border-collapse:collapse;font-size:12px}td{padding:10px 3px;border-bottom:1px solid #18314a}td:last-child{text-align:right}.muted{color:var(--muted)}
-.bar{height:6px;background:#1a2b3d;border-radius:10px;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:35%}
-button,input{font:inherit} .action{border:1px solid #27617a;background:#0b2636;color:var(--cyan);padding:10px 12px;border-radius:10px}.action:active{transform:scale(.98)}
-input{background:#07111d;border:1px solid var(--line);border-radius:10px;color:white;padding:11px;width:100%;outline:none}
-.chatlog{height:150px;overflow:auto;background:#07111d;border:1px solid var(--line);border-radius:10px;padding:10px;margin:10px 0;color:#c5d8e7;font-size:12px;line-height:1.5}
-canvas{width:100%;height:150px;display:block}.hidden{display:none}
-footer{position:fixed;bottom:0;left:0;right:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#070b14ee;border-top:1px solid var(--line);text-align:center;color:#69849c;font-size:10px;backdrop-filter:blur(12px)}
-@media(min-width:650px){main{padding-left:24px;padding-right:24px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wide{grid-column:span 2}}
+:root{--bg:#050b13;--panel:#0a1724;--panel2:#0d2030;--line:#18364a;--cyan:#42d9f5;--blue:#4b8dff;--muted:#8ca8bb;--white:#eaf7ff;--green:#48dfad;--amber:#ffca70;--red:#ff7184}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#12334a 0,#07111d 42%,#050b13 80%);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.shell{max-width:1180px;margin:auto;padding:18px 16px 100px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 2px 20px;border-bottom:1px solid #173348}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border:1px solid var(--cyan);border-radius:13px;display:grid;place-items:center;color:var(--cyan);font-weight:900;letter-spacing:-2px;box-shadow:0 0 24px #42d9f522;font-size:20px}.brand h1{font-size:20px;letter-spacing:4px;margin:0}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:3px}
+.status{font-size:10px;color:var(--green);border:1px solid #246c60;border-radius:20px;padding:7px 10px;white-space:nowrap}
+.hero{padding:26px 2px 20px}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:2.6px;font-weight:700}.hero h2{font-size:clamp(26px,6vw,42px);line-height:1.08;margin:9px 0 8px;letter-spacing:-1px}.hero p{color:var(--muted);max-width:620px;line-height:1.55;margin:0;font-size:13px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.panel{background:linear-gradient(145deg,#0c1d2bdf,#08131fef);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 12px 36px #0003;min-width:0}.panel h3{font-size:13px;letter-spacing:1.3px;margin:0 0 13px}.sub{color:var(--muted);font-size:11px;line-height:1.5}.assistant-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}.orb{width:50px;height:50px;border-radius:50%;border:1px solid #40d8f5a8;background:radial-gradient(circle,#1b7791 0,#103348 43%,#081723 72%);box-shadow:0 0 24px #42d9f533;position:relative}.orb:after{content:"";position:absolute;inset:9px;border:1px solid #8ceeff88;border-radius:50%}.assistant-top strong{display:block;font-size:15px}.assistant-top small{color:var(--cyan);font-size:10px;letter-spacing:1.4px}
+.chat{height:220px;overflow:auto;background:#06111b;border:1px solid #173247;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}.msg{font-size:12px;line-height:1.5;max-width:92%;padding:10px 12px;border-radius:12px}.nexus{align-self:flex-start;background:#10283a;border:1px solid #1b4d64}.user{align-self:flex-end;background:#123b4b;border:1px solid #26758b}.composer{display:flex;gap:8px;margin-top:10px}.composer input,.note-input{min-width:0;flex:1;background:#06111b;border:1px solid #214158;color:var(--white);border-radius:10px;padding:12px;font-size:12px;outline:none}.btn{border:1px solid #26738b;color:var(--cyan);background:#0c2635;border-radius:10px;padding:10px 13px;font-size:11px;font-weight:700}.btn.primary{background:linear-gradient(135deg,#14738a,#1452a0);color:white;border:0}.btn:active{transform:scale(.98)}.voice-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}.voice-row .sub{flex:1;min-width:160px}
+.metric{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric-card{padding:13px;background:#071521;border:1px solid #173247;border-radius:12px}.metric-card span{display:block;color:var(--muted);font-size:10px}.metric-card b{display:block;font-size:17px;margin-top:6px}.pill{font-size:9px;color:var(--amber);border:1px solid #795c2e;border-radius:20px;padding:5px 8px;display:inline-block}
+.wide{margin-top:14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.section-head h3{margin:0}.list{display:flex;flex-direction:column;gap:8px}.item{display:flex;gap:10px;align-items:flex-start;background:#071521;border:1px solid #173247;border-radius:11px;padding:11px}.dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;margin-top:5px;box-shadow:0 0 10px var(--cyan);flex-shrink:0}.item b{font-size:11px;display:block;margin-bottom:4px}.item small{font-size:10px;color:var(--muted);line-height:1.45}.item .tag{margin-left:auto;color:var(--amber);font-size:9px;white-space:nowrap}
+textarea.note-input{width:100%;height:75px;resize:vertical;margin:8px 0}.note{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #183348}.note p{font-size:11px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.delete{color:var(--red);background:none;border:0;font-size:10px}
+.footer{margin-top:16px;text-align:center;color:#6f8b9f;font-size:9px;letter-spacing:1px;line-height:1.7}.nav{position:fixed;bottom:0;left:0;right:0;z-index:5;background:#07111df2;backdrop-filter:blur(14px);border-top:1px solid #1b394d;display:flex;justify-content:center;gap:6px;padding:9px 8px calc(9px + env(safe-area-inset-bottom))}.nav button{flex:1;max-width:150px;background:transparent;border:1px solid transparent;color:var(--muted);border-radius:10px;padding:9px 3px;font-size:10px}.nav button.active{color:var(--cyan);background:#0d2939;border-color:#20536a}
+.view{display:none}.view.active{display:block}.hidden{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding-top:22px}.shell{padding-left:12px;padding-right:12px}.panel{padding:14px}.chat{height:205px}.brand h1{font-size:18px}.status{font-size:9px}}
 </style>
 </head>
 <body>
-<header><span class="status">● PAPER MODE</span><div class="brand">NEXUS</div><div class="sub">NEXT-GENERATION AI TRADING INTELLIGENCE</div></header>
-<nav id="nav">
-<button class="active" data-page="command">Command Centre</button><button data-page="assistant">Assistant</button><button data-page="markets">Markets</button><button data-page="engine">Trading Engine</button><button data-page="risk">Risk Shield</button><button data-page="missions">Missions</button>
-</nav>
-<main>
-<section id="command" class="page">
-<div class="eyebrow">SYSTEM OVERVIEW / DEMO ENVIRONMENT</div>
+<div class="shell">
+<header><div class="brand"><div class="logo">N</div><div><h1>NEXUS</h1><small>NEXT-GENERATION AI TRADING INTELLIGENCE</small></div></div><div class="status">● SYSTEM ONLINE · DEMO UI</div></header>
+<div class="hero"><div class="eyebrow">COMMANDER INTERFACE / V2</div><h2>Intelligence with<br><span style="color:var(--cyan)">composure.</span></h2><p>A calm, considered command centre for market insight, research and continuous improvement. Live broker connectivity is not enabled.</p></div>
+
+<section id="command" class="view active">
 <div class="grid">
-<div class="card"><div class="label">PAPER BALANCE</div><div class="value" id="balance">£10,000.00</div><div class="small">Simulated funds only</div></div>
-<div class="card"><div class="label">TODAY'S P/L</div><div class="value positive" id="pnl">+£0.00</div><div class="small">No live account connected</div></div>
-<div class="card"><div class="label">OPEN POSITIONS</div><div class="value" id="positions">0</div><div class="small">Paper trades</div></div>
-<div class="card"><div class="label">NEXUS LEVEL</div><div class="value">01 <span style="font-size:12px;color:var(--cyan)">INITIATE</span></div><div class="small">0 / 100 XP</div></div>
-<div class="card wide"><div class="row"><b>Market pulse</b><span class="pill">ILLUSTRATIVE DATA</span></div><canvas id="chart" width="600" height="180"></canvas><div class="small">Example movement only — not real-time prices.</div></div>
-<div class="card wide"><b>Risk Shield</b><div class="row" style="margin-top:12px"><span class="label">Demo daily risk limit</span><b>2.0%</b></div><div class="bar"><span></span></div><div class="small">Risk controls are display-only in this prototype.</div></div>
-<div class="card wide"><b>Recent activity</b><p class="small" id="activity">System initialised. No trades have been placed.</p></div>
+<div class="panel">
+<div class="assistant-top"><div class="orb"></div><div><strong>NEXUS Assistant</strong><small>CALM INTELLIGENCE · BRITISH ENGLISH</small></div></div>
+<div class="chat" id="chat"><div class="msg nexus">Good evening, Commander. I'm here and ready. We can review an idea, record a lesson or plan our next development step. There is no need to rush.</div></div>
+<div class="composer"><input id="chatInput" placeholder="Ask NEXUS something…" maxlength="300"><button class="btn primary" id="sendBtn">SEND</button></div>
+<div class="voice-row"><button class="btn" id="speakBtn">◖ SPEAK REPLY</button><button class="btn" id="listenBtn">◎ VOICE INPUT</button><span class="sub" id="voiceStatus">Voice uses your device's available browser speech features.</span></div>
 </div>
+<div class="panel"><h3>COMMAND SNAPSHOT</h3><div class="metric">
+<div class="metric-card"><span>Broker connection</span><b style="color:var(--amber);font-size:13px">Not connected</b></div>
+<div class="metric-card"><span>Execution mode</span><b style="color:var(--cyan);font-size:13px">Disabled</b></div>
+<div class="metric-card"><span>Learning journal</span><b id="noteCount">0 entries</b></div>
+<div class="metric-card"><span>Voice profile</span><b style="font-size:13px">Calm · en-GB</b></div>
+</div><p class="sub" style="margin-top:13px">This dashboard is a front-end prototype. It does not receive live prices, conduct background research or connect to Vantage MT5.</p><span class="pill">READ-ONLY BUILD STAGE</span></div>
+</div>
+<div class="panel wide"><div class="section-head"><h3>NEXUS ACTIVITY</h3><span class="pill">ILLUSTRATIVE FEED</span></div><div class="list">
+<div class="item"><i class="dot"></i><div><b>Knowledge Bank ready</b><small>Record trading observations and development notes for later review.</small></div><span class="tag">LOCAL</span></div>
+<div class="item"><i class="dot"></i><div><b>Research workflow planned</b><small>Future capability: scheduled market research with source links and timestamps.</small></div><span class="tag">PLANNED</span></div>
+<div class="item"><i class="dot"></i><div><b>Strategy validation required</b><small>Proposed changes must be backtested and forward-tested before approval.</small></div><span class="tag">SAFETY</span></div>
+</div></div>
 </section>
-<section id="assistant" class="page hidden"><div class="eyebrow">NEXUS CORE / ASSISTANT</div><div class="card"><b>Good evening, Commander.</b><p class="small">I'm NEXUS. This prototype can respond to a few local demo commands.</p><div class="chatlog" id="chat">NEXUS: Systems online. Demo mode is active.</div><div class="row"><input id="message" placeholder="Ask NEXUS…"><button class="action" id="send">Send</button></div><p class="small">Voice assistant is not connected in this starter.</p></div></section>
-<section id="markets" class="page hidden"><div class="eyebrow">NEXUS MARKETS / WATCHLIST</div><div class="card"><div class="row"><b>Multi-asset watchlist</b><span class="pill">SAMPLE VALUES</span></div><table><tbody id="watch"></tbody></table><p class="small">All prices below are fictional examples and must not be used to make trading decisions.</p></div></section>
-<section id="engine" class="page hidden"><div class="eyebrow">TRADING ENGINE / PAPER ONLY</div><div class="card"><b>Paper order simulator</b><p class="small">Place a fictional practice order. Nothing is sent to a broker or exchange.</p><div style="display:grid;gap:10px;margin-top:12px"><select id="symbol"><option>EUR/USD</option><option>BTC/USD</option><option>AAPL</option><option>UK100</option><option>GOLD</option></select><select id="side"><option>BUY</option><option>SELL</option></select><input id="size" type="number" min="1" value="1" placeholder="Units"><button class="action" id="place">Simulate paper order</button></div><p class="small" id="orderResult">No orders submitted.</p></div></section>
-<section id="risk" class="page hidden"><div class="eyebrow">RISK SHIELD / PROTECTION</div><div class="grid"><div class="card"><div class="label">DAILY LOSS LIMIT</div><div class="value">2.0%</div><div class="small">Illustrative setting</div></div><div class="card"><div class="label">MAX OPEN TRADES</div><div class="value">3</div><div class="small">Illustrative setting</div></div><div class="card wide"><b>Safety status</b><p class="small">No broker connection. No live execution. This panel is informational only; it does not enforce trading risk limits.</p></div></div></section>
-<section id="missions" class="page hidden"><div class="eyebrow">NEXUS MISSIONS / PROGRESSION</div><div class="card"><b>Mission 01 — Know your dashboard</b><p class="small">Explore the markets, assistant and risk panels. XP rewards are not yet implemented.</p><div class="bar"><span style="width:15%"></span></div><p class="small">Progress: 15%</p></div></section>
-</main>
-<footer>NEXUS PROTOTYPE • SIMULATED DATA • NOT FINANCIAL ADVICE • NO LIVE TRADING</footer>
+
+<section id="knowledge" class="view">
+<div class="panel"><div class="section-head"><h3>KNOWLEDGE BANK</h3><span class="pill">SAVED ON THIS DEVICE</span></div><p class="sub">Capture lessons, research questions and ideas. Entries are stored in this browser on this device; they are not yet shared with an AI model or synced to another device.</p>
+<textarea id="noteInput" class="note-input" maxlength="1500" placeholder="Record a lesson, market observation or idea…"></textarea><button class="btn primary" id="saveNote">SAVE TO KNOWLEDGE BANK</button><div id="notes" style="margin-top:14px"></div></div>
+</section>
+
+<section id="evolution" class="view">
+<div class="panel"><div class="section-head"><h3>NEXUS EVOLUTION</h3><span class="pill">DESIGN BLUEPRINT</span></div><div class="list">
+<div class="item"><i class="dot"></i><div><b>1 · Review decisions, not just outcomes</b><small>Compare the original rationale, market context, risk and result. A losing trade is not automatically a bad decision.</small></div></div>
+<div class="item"><i class="dot"></i><div><b>2 · Research with evidence</b><small>Gather timestamped information from reliable sources and distinguish facts from hypotheses.</small></div></div>
+<div class="item"><i class="dot"></i><div><b>3 · Test proposed improvements</b><small>Use historical and out-of-sample tests, then demo forward testing. Keep a version history.</small></div></div>
+<div class="item"><i class="dot"></i><div><b>4 · Ask before changing live behaviour</b><small>No self-authorised strategy changes, increased risk or live orders. Commander approval remains mandatory.</small></div></div>
+</div></div>
+</section>
+
+<section id="settings" class="view">
+<div class="panel"><h3>VOICE & BEHAVIOUR PROFILE</h3><div class="metric">
+<div class="metric-card"><span>Character</span><b style="font-size:13px">Wise · composed</b></div><div class="metric-card"><span>Accent preference</span><b style="font-size:13px">British English</b></div><div class="metric-card"><span>Speaking pace</span><b style="font-size:13px">Measured</b></div><div class="metric-card"><span>Trading authority</span><b style="font-size:13px;color:var(--green)">Approval required</b></div>
+</div><p class="sub" style="margin-top:14px">The SPEAK REPLY button uses speech synthesis supplied by your browser, if available. The actual voice and accent depend on voices installed on your device. This is not yet a dedicated AI voice service.</p><button class="btn" id="testVoice" style="margin-top:8px">TEST NEXUS VOICE</button></div>
+</section>
+<div class="footer">NEXUS V2 · INTERFACE PROTOTYPE · NO LIVE TRADING CONNECTION<br>Markets involve risk. Nothing here is a recommendation to trade.</div>
+</div>
+<nav class="nav"><button class="active" data-view="command">⌂ COMMAND</button><button data-view="knowledge">▤ KNOWLEDGE</button><button data-view="evolution">✧ EVOLUTION</button><button data-view="settings">⚙ PROFILE</button></nav>
 <script>
-const sample=[["EUR/USD","1.0842","+0.12%"],["BTC/USD","67,420","+1.8%"],["AAPL","214.30","-0.4%"],["UK100","8,245","+0.3%"],["GOLD","2,345.6","+0.6%"]];
-document.getElementById('watch').innerHTML=sample.map(x=>`<tr><td><b>${x[0]}</b><br><span class="muted">Demo quote</span></td><td>${x[1]}<br><span class="${x[2][0]==='-'?'negative':'positive'}">${x[2]}</span></td></tr>`).join('');
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(b.dataset.page).classList.remove('hidden');}));
-const c=document.getElementById('chart'),ctx=c.getContext('2d');ctx.strokeStyle='#42e8ff';ctx.lineWidth=3;ctx.beginPath();let vals=[92,88,101,96,110,105,119,114,126,120,137,132,145,139,151,148,160,154];vals.forEach((v,i)=>{let x=i*34,y=170-v;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();ctx.strokeStyle='#25435c';ctx.lineWidth=1;for(let y=35;y<180;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(600,y);ctx.stroke();}
-function reply(){let v=document.getElementById('message').value.trim();if(!v)return;let log=document.getElementById('chat');let r=/risk/i.test(v)?"The Risk Shield is showing illustrative limits only. No live risk controls are connected.":/market|scan/i.test(v)?"The watchlist contains fictional sample quotes across five asset classes.":/portfolio|balance/i.test(v)?"Your simulated paper balance is £10,000. No real funds are connected.":"I'm the NEXUS starter assistant. Try asking about markets, risk or your paper portfolio.";log.innerHTML+="<br><br><b>YOU:</b> "+v.replace(/[<>&]/g,"")+"<br><b>NEXUS:</b> "+r;log.scrollTop=log.scrollHeight;document.getElementById('message').value='';}
-document.getElementById('send').onclick=reply;document.getElementById('message').addEventListener('keydown',e=>{if(e.key==='Enter')reply()});
-document.getElementById('place').onclick=()=>{let s=document.getElementById('symbol').value,side=document.getElementById('side').value,n=Number(document.getElementById('size').value);let out=document.getElementById('orderResult');if(!Number.isFinite(n)||n<=0){out.textContent='Enter a positive demo unit amount.';return;}out.textContent=`Paper order simulated: ${side} ${n} ${s}. No real order was sent.`;document.getElementById('activity').textContent=out.textContent;document.getElementById('positions').textContent='1';};
+const $=id=>document.getElementById(id);
+const tabs=[...document.querySelectorAll('.nav button')];
+tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.view));window.scrollTo({top:0,behavior:'smooth'});}));
+function addMsg(text,kind){const d=document.createElement('div');d.className='msg '+kind;d.textContent=text;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight;}
+let lastReply="Good evening, Commander. Patience is a position too. Let's understand the conditions before considering any action.";
+function respond(q){const s=q.toLowerCase();if(s.includes('risk')||s.includes('loss'))return "Risk comes first, Commander. Before considering an opportunity, define the invalidation point, the maximum acceptable loss and whether the setup meets our rules.";if(s.includes('learn')||s.includes('mistake'))return "A useful lesson needs evidence. We should record the reasoning, the market context and the outcome, then test any proposed change before adopting it.";if(s.includes('research'))return "Research should be deliberate and traceable. Our next research engine will record its sources, timestamps and conclusions, and separate confirmed facts from hypotheses.";if(s.includes('voice'))return "I shall keep my delivery measured and clear, Commander. Calm when markets are unsettled, concise when decisions matter.";return "Understood, Commander. Let's examine the evidence carefully, define the risk and avoid forcing a decision. What matters most is a repeatable process, not a hurried prediction.";}
+function send(){const q=$('chatInput').value.trim();if(!q)return;addMsg(q,'user');$('chatInput').value='';lastReply=respond(q);setTimeout(()=>addMsg(lastReply,'nexus'),180);}
+$('sendBtn').addEventListener('click',send);$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')send();});
+function speak(text){if(!('speechSynthesis'in window)){$('voiceStatus').textContent='Speech synthesis is not available in this browser.';return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.88;u.pitch=.88;const voices=speechSynthesis.getVoices();const v=voices.find(x=>x.lang&&x.lang.toLowerCase().startsWith('en-gb'));if(v)u.voice=v;u.onstart=()=>$('voiceStatus').textContent='NEXUS is speaking…';u.onend=()=>$('voiceStatus').textContent='Voice ready.';speechSynthesis.speak(u);}
+$('speakBtn').addEventListener('click',()=>speak(lastReply));$('testVoice').addEventListener('click',()=>speak("Good evening, Commander. All is proceeding in an orderly fashion. We shall take the next step carefully."));
+$('listenBtn').addEventListener('click',()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$('voiceStatus').textContent='Voice input is not supported in this browser. You can still type to NEXUS.';return;}const r=new SR();r.lang='en-GB';r.onstart=()=>$('voiceStatus').textContent='Listening…';r.onresult=e=>{$('chatInput').value=e.results[0][0].transcript;send();};r.onerror=()=>$('voiceStatus').textContent='Microphone unavailable. Check browser permissions.';r.onend=()=>$('voiceStatus').textContent='Voice input finished.';r.start();});
+function getNotes(){try{return JSON.parse(localStorage.getItem('nexusKnowledge')||'[]')}catch(e){return[]}}
+function renderNotes(){const ns=getNotes();$('noteCount').textContent=ns.length+' entries';$('notes').innerHTML='';if(!ns.length){$('notes').innerHTML='<p class="sub">No entries yet. Your first lesson can go here.</p>';return;}ns.slice().reverse().forEach((n,i)=>{const row=document.createElement('div');row.className='note';const p=document.createElement('p');p.textContent=n.text+'\\n'+n.date;const del=document.createElement('button');del.className='delete';del.textContent='DELETE';del.onclick=()=>{const a=getNotes();a.splice(a.length-1-i,1);localStorage.setItem('nexusKnowledge',JSON.stringify(a));renderNotes();};row.append(p,del);$('notes').appendChild(row);});}
+$('saveNote').addEventListener('click',()=>{const t=$('noteInput').value.trim();if(!t)return;const a=getNotes();a.push({text:t,date:new Date().toLocaleString()});localStorage.setItem('nexusKnowledge',JSON.stringify(a));$('noteInput').value='';renderNotes();});
+renderNotes();
 </script>
 </body></html>
