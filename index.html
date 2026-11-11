@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<title>NEXUS | AI Trading Command Centre</title>
+<style>
+:root{--bg:#070b14;--panel:#0d1625;--panel2:#101e31;--line:#18314a;--cyan:#42e8ff;--blue:#438cff;--muted:#8aa3ba;--green:#36e0a1;--red:#ff6b83}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -10%,#12345a 0,transparent 40%),var(--bg);color:#eaf7ff;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:20px 17px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#070b14ed;backdrop-filter:blur(14px);z-index:5}
+.brand{font-size:22px;letter-spacing:5px;font-weight:800;color:var(--cyan);text-shadow:0 0 18px #42e8ff66}.sub{font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:4px}
+.status{float:right;font-size:10px;color:var(--green);border:1px solid #246b5b;padding:6px 9px;border-radius:20px;margin-top:4px}
+nav{display:flex;gap:8px;overflow:auto;padding:12px 14px;scrollbar-width:none}nav button{white-space:nowrap;background:#0b1726;border:1px solid var(--line);color:#9fb8cc;padding:9px 12px;border-radius:20px;font-size:12px}nav button.active{color:var(--cyan);border-color:var(--cyan);background:#0e2a3a}
+main{padding:4px 14px 90px;max-width:900px;margin:auto}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:2px;margin:16px 2px 9px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:linear-gradient(145deg,#112239,#0a1321 75%);border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:0 8px 28px #0004;min-width:0}.wide{grid-column:1/-1}.label{color:var(--muted);font-size:11px}.value{font-size:23px;font-weight:700;margin-top:7px;letter-spacing:.3px}.positive{color:var(--green)}.negative{color:var(--red)}.small{font-size:11px;color:var(--muted);margin-top:5px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.asset{font-weight:650}.pill{font-size:10px;border:1px solid var(--line);border-radius:12px;padding:4px 7px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:12px}td{padding:10px 3px;border-bottom:1px solid #18314a}td:last-child{text-align:right}.muted{color:var(--muted)}
+.bar{height:6px;background:#1a2b3d;border-radius:10px;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:35%}
+button,input{font:inherit} .action{border:1px solid #27617a;background:#0b2636;color:var(--cyan);padding:10px 12px;border-radius:10px}.action:active{transform:scale(.98)}
+input{background:#07111d;border:1px solid var(--line);border-radius:10px;color:white;padding:11px;width:100%;outline:none}
+.chatlog{height:150px;overflow:auto;background:#07111d;border:1px solid var(--line);border-radius:10px;padding:10px;margin:10px 0;color:#c5d8e7;font-size:12px;line-height:1.5}
+canvas{width:100%;height:150px;display:block}.hidden{display:none}
+footer{position:fixed;bottom:0;left:0;right:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#070b14ee;border-top:1px solid var(--line);text-align:center;color:#69849c;font-size:10px;backdrop-filter:blur(12px)}
+@media(min-width:650px){main{padding-left:24px;padding-right:24px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wide{grid-column:span 2}}
+</style>
+</head>
+<body>
+<header><span class="status">● PAPER MODE</span><div class="brand">NEXUS</div><div class="sub">NEXT-GENERATION AI TRADING INTELLIGENCE</div></header>
+<nav id="nav">
+<button class="active" data-page="command">Command Centre</button><button data-page="assistant">Assistant</button><button data-page="markets">Markets</button><button data-page="engine">Trading Engine</button><button data-page="risk">Risk Shield</button><button data-page="missions">Missions</button>
+</nav>
+<main>
+<section id="command" class="page">
+<div class="eyebrow">SYSTEM OVERVIEW / DEMO ENVIRONMENT</div>
+<div class="grid">
+<div class="card"><div class="label">PAPER BALANCE</div><div class="value" id="balance">£10,000.00</div><div class="small">Simulated funds only</div></div>
+<div class="card"><div class="label">TODAY'S P/L</div><div class="value positive" id="pnl">+£0.00</div><div class="small">No live account connected</div></div>
+<div class="card"><div class="label">OPEN POSITIONS</div><div class="value" id="positions">0</div><div class="small">Paper trades</div></div>
+<div class="card"><div class="label">NEXUS LEVEL</div><div class="value">01 <span style="font-size:12px;color:var(--cyan)">INITIATE</span></div><div class="small">0 / 100 XP</div></div>
+<div class="card wide"><div class="row"><b>Market pulse</b><span class="pill">ILLUSTRATIVE DATA</span></div><canvas id="chart" width="600" height="180"></canvas><div class="small">Example movement only — not real-time prices.</div></div>
+<div class="card wide"><b>Risk Shield</b><div class="row" style="margin-top:12px"><span class="label">Demo daily risk limit</span><b>2.0%</b></div><div class="bar"><span></span></div><div class="small">Risk controls are display-only in this prototype.</div></div>
+<div class="card wide"><b>Recent activity</b><p class="small" id="activity">System initialised. No trades have been placed.</p></div>
+</div>
+</section>
+<section id="assistant" class="page hidden"><div class="eyebrow">NEXUS CORE / ASSISTANT</div><div class="card"><b>Good evening, Commander.</b><p class="small">I'm NEXUS. This prototype can respond to a few local demo commands.</p><div class="chatlog" id="chat">NEXUS: Systems online. Demo mode is active.</div><div class="row"><input id="message" placeholder="Ask NEXUS…"><button class="action" id="send">Send</button></div><p class="small">Voice assistant is not connected in this starter.</p></div></section>
+<section id="markets" class="page hidden"><div class="eyebrow">NEXUS MARKETS / WATCHLIST</div><div class="card"><div class="row"><b>Multi-asset watchlist</b><span class="pill">SAMPLE VALUES</span></div><table><tbody id="watch"></tbody></table><p class="small">All prices below are fictional examples and must not be used to make trading decisions.</p></div></section>
+<section id="engine" class="page hidden"><div class="eyebrow">TRADING ENGINE / PAPER ONLY</div><div class="card"><b>Paper order simulator</b><p class="small">Place a fictional practice order. Nothing is sent to a broker or exchange.</p><div style="display:grid;gap:10px;margin-top:12px"><select id="symbol"><option>EUR/USD</option><option>BTC/USD</option><option>AAPL</option><option>UK100</option><option>GOLD</option></select><select id="side"><option>BUY</option><option>SELL</option></select><input id="size" type="number" min="1" value="1" placeholder="Units"><button class="action" id="place">Simulate paper order</button></div><p class="small" id="orderResult">No orders submitted.</p></div></section>
+<section id="risk" class="page hidden"><div class="eyebrow">RISK SHIELD / PROTECTION</div><div class="grid"><div class="card"><div class="label">DAILY LOSS LIMIT</div><div class="value">2.0%</div><div class="small">Illustrative setting</div></div><div class="card"><div class="label">MAX OPEN TRADES</div><div class="value">3</div><div class="small">Illustrative setting</div></div><div class="card wide"><b>Safety status</b><p class="small">No broker connection. No live execution. This panel is informational only; it does not enforce trading risk limits.</p></div></div></section>
+<section id="missions" class="page hidden"><div class="eyebrow">NEXUS MISSIONS / PROGRESSION</div><div class="card"><b>Mission 01 — Know your dashboard</b><p class="small">Explore the markets, assistant and risk panels. XP rewards are not yet implemented.</p><div class="bar"><span style="width:15%"></span></div><p class="small">Progress: 15%</p></div></section>
+</main>
+<footer>NEXUS PROTOTYPE • SIMULATED DATA • NOT FINANCIAL ADVICE • NO LIVE TRADING</footer>
+<script>
+const sample=[["EUR/USD","1.0842","+0.12%"],["BTC/USD","67,420","+1.8%"],["AAPL","214.30","-0.4%"],["UK100","8,245","+0.3%"],["GOLD","2,345.6","+0.6%"]];
+document.getElementById('watch').innerHTML=sample.map(x=>`<tr><td><b>${x[0]}</b><br><span class="muted">Demo quote</span></td><td>${x[1]}<br><span class="${x[2][0]==='-'?'negative':'positive'}">${x[2]}</span></td></tr>`).join('');
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(b.dataset.page).classList.remove('hidden');}));
+const c=document.getElementById('chart'),ctx=c.getContext('2d');ctx.strokeStyle='#42e8ff';ctx.lineWidth=3;ctx.beginPath();let vals=[92,88,101,96,110,105,119,114,126,120,137,132,145,139,151,148,160,154];vals.forEach((v,i)=>{let x=i*34,y=170-v;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();ctx.strokeStyle='#25435c';ctx.lineWidth=1;for(let y=35;y<180;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(600,y);ctx.stroke();}
+function reply(){let v=document.getElementById('message').value.trim();if(!v)return;let log=document.getElementById('chat');let r=/risk/i.test(v)?"The Risk Shield is showing illustrative limits only. No live risk controls are connected.":/market|scan/i.test(v)?"The watchlist contains fictional sample quotes across five asset classes.":/portfolio|balance/i.test(v)?"Your simulated paper balance is £10,000. No real funds are connected.":"I'm the NEXUS starter assistant. Try asking about markets, risk or your paper portfolio.";log.innerHTML+="<br><br><b>YOU:</b> "+v.replace(/[<>&]/g,"")+"<br><b>NEXUS:</b> "+r;log.scrollTop=log.scrollHeight;document.getElementById('message').value='';}
+document.getElementById('send').onclick=reply;document.getElementById('message').addEventListener('keydown',e=>{if(e.key==='Enter')reply()});
+document.getElementById('place').onclick=()=>{let s=document.getElementById('symbol').value,side=document.getElementById('side').value,n=Number(document.getElementById('size').value);let out=document.getElementById('orderResult');if(!Number.isFinite(n)||n<=0){out.textContent='Enter a positive demo unit amount.';return;}out.textContent=`Paper order simulated: ${side} ${n} ${s}. No real order was sent.`;document.getElementById('activity').textContent=out.textContent;document.getElementById('positions').textContent='1';};
+</script>
+</body></html>
